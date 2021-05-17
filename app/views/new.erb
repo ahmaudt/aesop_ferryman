@@ -1,0 +1,32 @@
+<main class="form-create-acct">
+  <div class="container">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col px-5 mx-5">
+        <div class="card mt-5">
+          <div class="card-header">
+            <h2 class="fw-normal text-center">Sign in</h2>
+          </div>
+          <div class="card-body pt-0">
+            <form method="post" action="/account/new">
+              <div class="form-floating mt-5 mb-3">
+                <input class="form-control form-control-sm" name="first_name" type="text">
+              </div>
+              <div class="form-floating mt-5 mb-3">
+                <input class="form-control form-control-sm" name="last_name" type="text">
+              </div>
+              <div class="form-floating mt-5 mb-3">
+                <input class="form-control form-control-sm" name="uga_myid" type="text">
+              </div>
+              <div class="form-floating">
+                <input class="form-control form-control-sm" name="password" type="password">
+              </div>
+              <button class="btn btn-primary mt-3" type="submit">submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+</main>

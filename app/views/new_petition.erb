@@ -1,0 +1,47 @@
+<% if Helpers.is_logged_in?(session) %>
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-1"></div>
+      <div class="col">
+  <div class="col-md-7 col-lg-8">
+  <h4>New Petition</h4>
+    <form method="post" action="/petitions">
+      <div class="row g-3">
+        <div class="col-sm-12">
+          <div class="input-group">
+            <select class="form-select" id="petition_type" name="petition_type">
+              <option selected>Select petition type…</option>
+              <option value="permit_override">Permit-Override</option>
+              <option value="exception_request">Exception</option>
+              <option value="substitution_request">Substitution</option>
+              <option value="waiver">Waiver</option>
+              <option value="curriculum_change">Curriculum Change</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <label for="uga_myid" class="form-label">Student's UGA MyID</label>
+          <input type="text" class="form-control" id="uga_myid" name="uga_myid">
+        </div>
+        <div class="col-sm-4">
+          <label for="first_name" class="form-label">Student's First Name</label>
+          <input type="text" class="form-control" id="first_name" name="first_name">
+        </div>
+        <div class="col-sm-4">
+          <label for="last_name" class="form-label">Student's Last Name</label>
+          <input type="text" class="form-control" id="last_name" name="last_name">
+        </div>
+      </div>
+      <div class="col-12 mt-3">
+        <label for="content">Petition Request</label>
+        <textarea class="form-control mt-2" id="content" name="content" rows="5"></textarea>
+      </div>
+      <button type="submit" class="btn btn-danger" name="submit">save</button>
+      <i class="mx-1"></i>
+      <a href="/petitions" role="button" class="btn btn-warning my-3 text-white" type="button">cancel</a>
+    </form>
+</div>
+    </div>
+  </div>
+  </div>
+<% end %>
