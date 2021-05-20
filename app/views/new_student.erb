@@ -1,0 +1,74 @@
+<main class="form-create-acct">
+  <div class="container">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col px-5 mx-5">
+        <div class="card mt-5">
+          <div class="card-header">
+            <h2 class="fw-normal text-center">Create Student Record</h2>
+          </div>
+          <div class="card-body pt-0">
+            <form method="post" action="/students">
+              <div class="form-floating input-group mt-5 mb-3">
+                <select class="form-select" id="major_id" name="major_id">
+                  <option selected>Select Major</option>
+                  <option value="1">COEC</option>
+                  <option value="2">COJO</option>
+                  <option value="3">FAME</option>
+                  <option value="4">FIPL</option>
+                  <option value="5">FUIN</option>
+                  <option value="6">HDFS</option>
+                  <option value="7">HMGP</option>
+                </select>
+              </div>
+              <div class="form-floating mt-5 mb-3">
+                <input class="form-control form-control-sm" name="first_name" type="text">
+                <label for="floatingInput">First Name</label>
+              </div>
+              <div class="form-floating mt-5 mb-3">
+                <input class="form-control form-control-sm" name="last_name" type="text">
+                <label for="floatingInput">Last Name</label>
+              </div>
+              <div class="form-floating mt-5 mb-3">
+                <input class="form-control form-control-sm" name="uga_myid" type="text">
+                <label for="floatingInput">UGA MyID</label>
+              </div>
+              <div class="form-floating mt-5 mb-3">
+                <input class="form-control form-control-sm" list="matricTermOptions" name="matriculation_term" id="matriculation_term" placeholder="Type to search...">
+                <datalist id="matricTermOptions">
+                  <% fall_term_code = 201108 %>
+                  <% spring_term_code = 201202 %>
+                  <% summer_term_code = 201205 %>
+                  <% term_year = 2011 %>
+                  <% while fall_term_code < 203108 && spring_term_code < 203202 && summer_term_code < 203205 %>
+                    <option value="<%= fall_term_code += 100 %>">Fall <%= spring_term = term_year +=1 %></option>
+                    <option value="<%= spring_term_code += 100 %>">Spring <%= spring_term +=1 %></option>
+                    <option value="<%= summer_term_code += 100 %>">Summer <%= spring_term %></option>
+                  <% end %>
+                </datalist>
+                <label for="floatingInput">Matriculation Term</label>
+              </div>
+              <div class="form-floating mt-5 mb-3">
+                <input class="form-control form-control-sm" list="gradTermOptions" name="graduation_term" id="graduation_term" placeholder="Type to search...">
+                <datalist id="gradTermOptions">
+                  <% fall_term_code = 201108 %>
+                  <% spring_term_code = 201202 %>
+                  <% summer_term_code = 201205 %>
+                  <% term_year = 2011 %>
+                  <% while fall_term_code < 203108 && spring_term_code < 203202 && summer_term_code < 203205 %>
+                    <option value="<%= fall_term_code += 100 %>">Fall <%= spring_term = term_year +=1 %></option>
+                    <option value="<%= spring_term_code += 100 %>">Spring <%= spring_term +=1 %></option>
+                    <option value="<%= summer_term_code += 100 %>">Summer <%= spring_term %></option>
+                  <% end %>
+                </datalist>
+                <label for="floatingInput">Graduation Term</label>
+              </div>
+              <button class="btn btn-primary mt-3" type="submit">submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+</main>

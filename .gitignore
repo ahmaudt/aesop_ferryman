@@ -1,2 +1,6 @@
 .env
 db/seeds.rb
+.idea
+db/development.sqlite
+db/schema.rb
+mint

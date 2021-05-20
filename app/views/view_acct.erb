@@ -1,0 +1,39 @@
+<main class="form-create-acct">
+  <div class="container">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col px-5 mx-5">
+        <div class="card mt-5">
+          <div class="card-header">
+            <h2 class="fw-normal text-center">Your Account Info</h2>
+          </div>
+          <div class="card-body pt-0">
+            <form method="post" action="/account">
+              <input id="hidden" type="hidden" name="_method" value="patch">
+              <div class="form-floating mt-5 mb-3">
+                <input class="form-control form-control-sm" name="first_name" type="text" value="<%= @advisor.first_name %>">
+                <label for="floatingInput">First Name</label>
+              </div>
+              <div class="form-floating mt-5 mb-3">
+                <input class="form-control form-control-sm" name="last_name" type="text" value="<%= @advisor.last_name %>">
+                <label for="floatingInput">Last Name</label>
+              </div>
+              <div class="form-floating mt-5 mb-3">
+                <input class="form-control form-control-sm" name="uga_myid" type="text" value="<%= @advisor.uga_myid %>">
+                <label for="floatingInput">UGA MyID</label>
+              </div>
+              <div class="form-floating">
+                <input class="form-control form-control-sm" name="password" type="password" value="<%= @advisor.password %>">
+                <label for="floatingInput">Password</label>
+              </div>
+              <button type="submit" class="btn btn-danger" name="submit">save</button>
+              <i class="mx-1"></i>
+              <a href="/dashboard" role="button" class="btn btn-warning my-3 text-white" type="button">cancel</a>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+</main>
