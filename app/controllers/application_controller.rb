@@ -113,6 +113,10 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/account/new' do
+    @acct = Advisor.find_by(uga_myid: params[:uga_myid])
+    if @acct != nil
+      redirect to('/acct_exists')
+    end
     @advisor = Advisor.create(first_name: params[:first_name], last_name: params[:last_name], uga_myid: params[:uga_myid], password: params[:password])
     @advisor.save
     if @advisor.save
@@ -193,5 +197,9 @@ class ApplicationController < Sinatra::Base
 
   get '/student_error' do
     erb :no_student
+  end
+
+  get '/acct_exists' do
+    erb :account_exists
   end
 end
