@@ -16,12 +16,9 @@ class ApplicationController < Sinatra::Base
 
   # get routes
   #
-  get '/public/images/:img' do
-    send_file('public/images/'+params[:img])
-  end
 
   get '/' do
-    erb :welcome
+    erb :front
   end
 
   get '/login' do
@@ -50,11 +47,6 @@ class ApplicationController < Sinatra::Base
   get '/petitions' do
     erb :petitions
   end
-
-  # get '/petitions/:id' do
-  #   @petition = Petition.find_by_id(params[:id])
-  #   erb :view_petition
-  # end
 
   get '/petitions/permit_override/new' do
     erb :new_permit_override
@@ -102,6 +94,10 @@ class ApplicationController < Sinatra::Base
   get '/students/:id' do
     @student = @student.find_by_id(params[:id])
     erb :view_student
+  end
+
+  get '/public/images/:img' do
+    send_file('public/images/'+params[:img])
   end
 
   # post routes
