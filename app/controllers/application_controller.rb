@@ -22,7 +22,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    erb :sign_in
+    erb :'/account/sign_in'
   end
 
   get '/dashboard' do
@@ -31,12 +31,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/account/new' do
-    erb :create_acct
+    erb :'/account/create_acct'
   end
 
   get '/account' do
     @advisor = Advisor.find_by_id(session[:user_id])
-    erb :view_acct
+    erb :'/account/view_acct'
   end
 
   get '/logout' do
@@ -45,55 +45,55 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/petitions' do
-    erb :petitions
+    erb :'/petitions/all'
   end
 
   get '/petitions/permit_override/new' do
-    erb :new_permit_override
+    erb :'/petitions/new_permit_override'
   end
 
   get '/petitions/exception/new' do
-    erb :new_exception
+    erb :'/petitions/new_exception'
   end
 
   get '/petitions/substitution/new' do
-    erb :new_substitution
+    erb :'/petitions/new_substitution'
   end
 
   get '/petitions/waiver/new' do
-    erb :new_waiver
+    erb :'/petitions/new_waiver'
   end
 
   get '/petitions/new' do
-    erb :new_petition
+    erb :'/petitions/new_petition'
   end
 
   get '/petitions/:id' do
     @student = Student.find_by(uga_myid: params[:uga_myid])
     @petition = Petition.find_by_id(params[:id])
     if @petition.petition_type == "waiver"
-      erb :view_waiver
+      erb :'/petitions/view_waiver'
     elsif @petition.petition_type == "permit-override"
-      erb :view_permit_override
+      erb :'/petitions/view_permit_override'
     elsif @petition.petition_type == "exception"
-      erb :view_exception
+      erb :'/petitions/view_exception'
     elsif @petition.petition_type == "substitution"
-      erb :view_substitution
+      erb :'/petitions/view_substitution'
     end
   end
 
   get '/students' do
     @students = Student.all
-    erb :students
+    erb :'/students/all'
   end
 
   get '/students/new' do
-    erb :new_student
+    erb :'/students/new_student'
   end
 
   get '/students/:id' do
     @student = @student.find_by_id(params[:id])
-    erb :view_student
+    erb :'/students/view_student'
   end
 
   get '/public/images/:img' do
@@ -190,18 +190,18 @@ class ApplicationController < Sinatra::Base
   # error routes
 
   get '/acct_error' do
-    erb :user_error
+    erb :'/error/user_error'
   end
 
   get '/pass_error' do
-    erb :password_error
+    erb :'/error/password_error'
   end
 
   get '/student_error' do
-    erb :no_student
+    erb :'/error/no_student'
   end
 
   get '/acct_exists' do
-    erb :account_exists
+    erb :'/error/account_exists'
   end
 end
