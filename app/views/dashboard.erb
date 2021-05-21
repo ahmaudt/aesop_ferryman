@@ -3,30 +3,25 @@
   <div class="row mt-5 mb-3">
     <div class="col-1"></div>
     <div class="col">
-      <div class="card rounded-0">
-        <div class="card-header">
+      <div class="card rounded-0 mx-auto" style="max-width: fit-content">
+        <div class="card-header bg-light">
           <h3>Newest Petitions</h3>
         </div>
-        <div class="card-group">
-          <div class="card rounded-0">
-            <div class="card-body">
-              <p class="card-text">This is a card</p>
-            </div>
-          </div>
-          <div class="card rounded-0">
-            <div class="card-body">
-              <p class="card-text">This is another card</p>
-            </div>
-          </div>
-          <div class="card rounded-0">
-            <div class="card-body">
-              <p class="card-text">This is yet another card</p>
-            </div>
-          </div>
-        </div>
+        <div class="card-group" style="width: auto;">
+          <% @user.petitions.collect do |p| %>
+              <div class="card rounded-0" style="max-width: 18rem;">
+                <div class="card-header bg-primary text-white">
+                  <h4>Type: <%= p.petition_type %></h4>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title"><%= p.student.last_name %>, <%= p.student.first_name  %></h5>
+                  <p class="card-text"><%= p.content %></p>
+                </div>
+              </div>
+          <% end %>
       </div>
     </div>
-    <div class="col-1"></div>
+    </div>
   </div>
   <div class="row mt-5 mb-3">
     <div class="col-1"></div>

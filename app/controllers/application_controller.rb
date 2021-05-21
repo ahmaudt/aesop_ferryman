@@ -23,6 +23,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/dashboard' do
+    @user = Advisor.find_by_id(session[:user_id])
     erb :dashboard
   end
 
@@ -104,6 +105,10 @@ class ApplicationController < Sinatra::Base
     if @advisor != nil && @advisor.authenticate(params[:password])
       session[:user_id] = @advisor.id
       redirect '/dashboard'
+    elsif @advisor == nil
+      redirect to('/acct_error')
+    elsif !!@advisor.authenticate(params[:password])
+      redirect to('/pass_error')
     end
   end
 
