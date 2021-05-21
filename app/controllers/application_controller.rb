@@ -9,10 +9,16 @@ class ApplicationController < Sinatra::Base
     enable :sessions unless test?
     set :session_secret, ENV["SESSION_SECRET"]
     set :public_folder, 'public'
+    set :public_folder, 'public/images'
     set :views, 'app/views'
+    enable :static
   end
 
   # get routes
+  #
+  get '/public/images/:img' do
+    send_file('public/images/'+params[:img])
+  end
 
   get '/' do
     erb :welcome

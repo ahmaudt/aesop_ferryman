@@ -20,10 +20,13 @@
   <body>
   <header>
     <div class="px-3 bg-dark text-white">
-      <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-items-center justify-content-lg-start">
-          <h3 class="d-flex py-3 my-lg-0 me-lg-auto">Aesop's Ferryman</h3>
-          <ul class="nav col-12 col-lg-auto justify-content-center">
+      <div class="container-flex">
+        <div class="d-flex">
+          <div class="w-75">
+            <img src="public/images/Screen-SSAC-XH-CW.png" style="max-width: 300px">
+            <h3 class="d-flex py-1 mx-2 my-lg-0 me-lg-auto">Aesop's Ferryman</h3>
+          </div>
+            <ul class="nav col-12 col-lg-auto align-items-center">
             <% if Helpers.is_logged_in?(session) %>
               <li>
                 <a href="<%= '/dashboard' %>" class="nav-link text-secondary text-white justify-content-center">
