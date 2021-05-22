@@ -3,6 +3,7 @@
 # controller for routes between primary application functions and views
 require './config/environment'
 require_relative '../helpers/helpers'
+require 'pony'
 
 class ApplicationController < Sinatra::Base
   configure do
@@ -79,6 +80,8 @@ class ApplicationController < Sinatra::Base
       erb :'/petitions/view_exception'
     elsif @petition.petition_type == "substitution"
       erb :'/petitions/view_substitution'
+    else
+      erb :'/petitions/view_permit_override'
     end
   end
 
@@ -132,6 +135,10 @@ class ApplicationController < Sinatra::Base
     @student = Student.find_by(uga_myid: params[:uga_myid])
     if @student != nil
       @petition = Petition.create(petition_type: params[:petition_type], content: params[:content], advisor_id: session[:user_id], student_id: @student.id, course_id: params[:course_id], audit_block: params[:audit_block], course_substituted_for: params[:course_substituted_for], waived_requirement: params[:waived_requirement], course_taken: params[:course_taken], permit_override: params[:permit_override])
+      Pony.mail to: 'ahmaud@uga.edu',
+                from: 'ahmaud@uga.edu',
+                subject: "Your #{@petition.petition_type} request has been submitted!",
+                body: erb(:email, :layout => false)
       redirect to "/petitions/#{@petition.id}"
     else
       redirect to('/student_error')
@@ -152,10 +159,15 @@ class ApplicationController < Sinatra::Base
 
   # patch routes
 
-  patch '/petitions/:id' do
+  patch '/petitions/:id/edit' do
     @petition = Petition.find_by_id(params[:id])
     @petition.content = params[:content]
     @petition.petition_type = params[:petition_type]
+    if params[:permit_override].nil?
+      @petition.permit_override = @petition.permit_override
+    else
+      @petition.permit_override = params[:permit_override]
+    end
     @petition.save
     redirect "/petitions/#{@petition.id}"
   end

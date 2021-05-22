@@ -1,0 +1,14 @@
+
+<% if Helpers.is_logged_in?(session) %>
+  <% @current_user = Helpers.current_user(session) %>
+  <% @student = Student.find_by_id(@petition.student_id) %>
+
+  FROM: the Student Success and Advising Center in the College of Family and Consumer Sciences
+
+    The following petition has been submitted on your behalf:
+
+      Student: <%= @student.first_name %> <%= @student.last_name %>
+      UGA MyID: <%= @student.uga_myid %>
+      Details: <%= @petition.content %>
+
+<% end %>
