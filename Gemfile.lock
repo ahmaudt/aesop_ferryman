@@ -119,6 +119,7 @@ GEM
       nokogiri (~> 1.8)
 
 PLATFORMS
+  unknown
   x86_64-darwin-20
 
 DEPENDENCIES
