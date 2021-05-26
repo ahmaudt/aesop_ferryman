@@ -12,5 +12,6 @@ ActiveRecord::Base.establish_connection(
 )
 
 require './app/controllers/application_controller'
-require './app/helpers/helpers'
+require_relative '../app/controllers/error_controller'
+require 'pony'
 require_all 'app'

@@ -1,10 +1,7 @@
 # frozen_string_literal: true
+require './config/environment'
 
 # controller for routes between primary application functions and views
-require './config/environment'
-require_relative '../helpers/helpers'
-require 'pony'
-
 class ApplicationController < Sinatra::Base
   configure do
     enable :sessions unless test?
@@ -12,11 +9,9 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :public_folder, 'public/images'
     set :views, 'app/views'
-    enable :static
   end
 
   # get routes
-  #
 
   get '/' do
     erb :front
@@ -72,13 +67,14 @@ class ApplicationController < Sinatra::Base
   get '/petitions/:id' do
     @student = Student.find_by(uga_myid: params[:uga_myid])
     @petition = Petition.find_by_id(params[:id])
-    if @petition.petition_type == "waiver"
+    case @petition.petition_type
+    when 'waiver'
       erb :'/petitions/view_waiver'
-    elsif @petition.petition_type == "permit-override"
+    when 'permit-override'
       erb :'/petitions/view_permit_override'
-    elsif @petition.petition_type == "exception"
+    when 'exception'
       erb :'/petitions/view_exception'
-    elsif @petition.petition_type == "substitution"
+    when 'substitution'
       erb :'/petitions/view_substitution'
     else
       erb :'/petitions/view_permit_override'
@@ -99,9 +95,9 @@ class ApplicationController < Sinatra::Base
     erb :'/students/view_student'
   end
 
-  get '/public/images/:img' do
-    send_file('public/images/'+params[:img])
-  end
+  get('/public/images/:img') { send_file('public/images/' + params[:img]) }
+
+  get('/public/stylesheets/:css') { send_file('public/stylesheets/' + params[:css]) }
 
   # post routes
 
@@ -132,11 +128,12 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/petitions' do
+    @advisor = Advisor.find_by_id(session[:user_id])
     @student = Student.find_by(uga_myid: params[:uga_myid])
     if @student != nil
       @petition = Petition.create(petition_type: params[:petition_type], content: params[:content], advisor_id: session[:user_id], student_id: @student.id, course_id: params[:course_id], audit_block: params[:audit_block], course_substituted_for: params[:course_substituted_for], waived_requirement: params[:waived_requirement], course_taken: params[:course_taken], permit_override: params[:permit_override])
-      Pony.mail to: 'ahmaud@uga.edu',
-                from: 'ahmaud@uga.edu',
+      Pony.mail to: "#{params[:uga_myid]}@uga.edu",
+                from: "#{@advisor.uga_myid}@uga.edu",
                 subject: "Your #{@petition.petition_type} request has been submitted!",
                 body: erb(:email, :layout => false)
       redirect to "/petitions/#{@petition.id}"
@@ -197,23 +194,5 @@ class ApplicationController < Sinatra::Base
     @student = Student.find_by_id(params[:id])
     @student.delete
     redirect to('/students')
-  end
-
-  # error routes
-
-  get '/acct_error' do
-    erb :'/error/user_error'
-  end
-
-  get '/pass_error' do
-    erb :'/error/password_error'
-  end
-
-  get '/student_error' do
-    erb :'/error/no_student'
-  end
-
-  get '/acct_exists' do
-    erb :'/error/account_exists'
   end
 end

@@ -4,3 +4,10 @@ db/seeds.rb
 db/development.sqlite
 db/schema.rb
 mint
+/db/migrate/20210515215904_create_majors.rb
+/db/migrate/20210515220245_create_departments.rb
+/db/migrate/20210515224727_create_academic_term_codes.rb
+/db/migrate/20210515224748_create_academic_semesters.rb
+/db/migrate/20210515224931_create_term_codes_and_semesters.rb
+/db/migrate/20210519193701_add_new_petition_columns.rb
+/db/migrate/20210520152948_add_permit_override_column.rb

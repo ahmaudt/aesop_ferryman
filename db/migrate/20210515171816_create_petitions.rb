@@ -8,7 +8,13 @@ class CreatePetitions < ActiveRecord::Migration[5.2]
       t.string :content
       t.integer :advisor_id
       t.integer :student_id
-
+      t.string :permit_override
+      t.string :course_id
+      t.string :audit_block
+      t.string :course_taken
+      t.string :course_substituted_for
+      t.string :waived_requirement
+      t.string :course_reg_num
       t.timestamps
     end
   end
