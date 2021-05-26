@@ -11,3 +11,5 @@ mint
 /db/migrate/20210515224931_create_term_codes_and_semesters.rb
 /db/migrate/20210519193701_add_new_petition_columns.rb
 /db/migrate/20210520152948_add_permit_override_column.rb
+/app/views/welcome.erb
+/app/views/success.erb
