@@ -10,7 +10,7 @@
           <h3>Newest Petitions</h3>
         </div>
         <div class="card-group" style="width: auto;">
-          <% @user.recent_petitions.collect do |p| %>
+          <% @user.petitions.limit(3).collect do |p| %>
               <div class="card rounded-0" style="max-width: 18rem;">
                 <div class="card-header bg-primary text-white">
                   <h4><a class="text-white" href="/petitions/<%= p.id %>" >Type: <%= p.petition_type %></a></h4>

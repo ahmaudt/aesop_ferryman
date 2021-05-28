@@ -91,7 +91,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/students/:id' do
-    @student = @student.find_by_id(params[:id])
+    @student = Student.find_by_id(params[:id])
     erb :'/students/view_student'
   end
 
@@ -108,7 +108,7 @@ class ApplicationController < Sinatra::Base
       redirect '/dashboard'
     elsif @advisor == nil
       redirect to('/acct_error')
-    elsif !!@advisor.authenticate(params[:password])
+    elsif @advisor.authenticate(params[:password]) == false
       redirect to('/pass_error')
     end
   end
@@ -144,14 +144,18 @@ class ApplicationController < Sinatra::Base
 
   post '/students' do
     @advisor = Advisor.find_by_id(session[:user_id])
-    @student = Student.create(first_name: params[:first_name], last_name: params[:last_name], uga_myid: params[:uga_myid], matriculation_term: params[:matriculation_term], graduation_term: params[:graduation_term], advisor_id: session[:user_id])
-    @major = Major.find_by_id(params[:major_id])
-    if @major != nil
-      @major = Major.create(id: params[:major_id])
-      @student.major_id = @major.id
+    if Student.find_by(uga_myid: params[:uga_myid])
+      redirect to('/acct_error')
+    else
+      @student = Student.create(first_name: params[:first_name], last_name: params[:last_name], uga_myid: params[:uga_myid], matriculation_term: params[:matriculation_term], graduation_term: params[:graduation_term], advisor_id: session[:user_id])
+      @major = Major.find_by_id(params[:major_id])
+      if @major == nil
+        @major = Major.create(id: params[:major_id])
+        @student.major_id = @major.id
+      end
+      @advisor.students << @student
+      redirect to("/students/#{@student.id}")
     end
-    @advisor.students << @student
-    redirect to("/students/#{@student.id}")
   end
 
   # patch routes

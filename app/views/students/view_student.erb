@@ -12,15 +12,15 @@
             <form method="post" action="/students/:id/edit">
               <input id="hidden" type="hidden" name="_method" value="patch">
               <div class="form-floating mt-5 mb-3">
-                <input class="form-control form-control-sm" name="first_name" type="text">
+                <input class="form-control form-control-sm" name="first_name" type="text" value="<%= @student.first_name %>">
                 <label for="floatingInput">First Name</label>
               </div>
               <div class="form-floating mt-5 mb-3">
-                <input class="form-control form-control-sm" name="last_name" type="text">
+                <input class="form-control form-control-sm" name="last_name" type="text" value="<%= @student.last_name %>">
                 <label for="floatingInput">Last Name</label>
               </div>
               <div class="form-floating mt-5 mb-3">
-                <input class="form-control form-control-sm" name="uga_myid" type="text">
+                <input class="form-control form-control-sm" name="uga_myid" type="text" value="<%= @student.uga_myid %>">
                 <label for="floatingInput">UGA MyID</label>
               </div>
               <button class="btn btn-primary mt-3" type="submit">submit</button>

@@ -2,7 +2,7 @@
   <% @current_user = Helpers.current_user(session) %>
   <div class="container my-5">
     <h2>Your Students</h2>
-    <button href="/students/new" class="btn btn-primary rounded-1 btn-lg shadow">Add Student</button>
+    <a href="/students/new" role="button" class="btn btn-primary rounded-1 btn-lg shadow">Add Student</a>
     <div class="table-responsive">
       <table class="table table-striped table-sm">
         <thead>
