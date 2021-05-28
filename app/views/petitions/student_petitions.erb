@@ -1,0 +1,55 @@
+<% if Helpers.is_logged_in?(session) %>
+<% @current_user = Helpers.current_user(session) %>
+<div class="container my-5">
+  <h2><%= @student.first_name + " " + @student.last_name+"'s'"%> Petition Requests</h2>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover table-sm">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Petition Type</th>
+          <th>View or Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% indexed_petitions = @current_user.petitions.each.with_index(1) do |val, idx| %>
+          <% indexed_petitions.collect do |p| %>
+              <td><%= idx %></td>
+          <td><%= p.petition_type %></td>
+            <td><a class="btn btn-success" href="/petitions/<%= p.id %>" role="button">view or edit</a></td>
+            <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePetition<%= p.id %>">delete</button></td>
+            <div class="modal fade" id="deletePetition<%= p.id %>" tabindex="-1" aria-labelledby="deletePetition<%= p.id %>" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Student Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure you want to delete this student?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form action="/petitions/<%= p.id %>" method="post"><input id="hidden" type="hidden" name="_method" value="delete"><input type="submit" class="btn btn-danger" value="delete"></form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+  <% else %>
+  <div class="alert alert-danger d-flex align-items-center" role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+    <div>
+      You are not authorized to view this page!
+    </div>
+  </div>
+<% end %>
