@@ -95,6 +95,12 @@ class ApplicationController < Sinatra::Base
     erb :'/students/view_student'
   end
 
+  get '/students/:id/petitions' do
+    @student = Student.find_by_id(params[:id])
+    @advisor = Helpers.current_user(session)
+    erb :'/petitions/student_petitions'
+  end
+
   get('/public/images/:img') { send_file('public/images/' + params[:img]) }
 
   get('/public/stylesheets/:css') { send_file('public/stylesheets/' + params[:css]) }

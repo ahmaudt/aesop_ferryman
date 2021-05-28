@@ -24,7 +24,7 @@
               <% if s.petitions.empty? %>
                 <%= "No Petitions" %>
                 <% else %>
-                <a href="/students/:id/petitions" class="btn btn-success" role="button">view petitions</a>
+                <a href="/students/<%= s.id %>/petitions" class="btn btn-success" role="button">view petitions</a>
               <% end %>
             </td>
             <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteStudent<%= s.id %>">delete student</button></td>
