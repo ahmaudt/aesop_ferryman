@@ -97,7 +97,6 @@ class ApplicationController < Sinatra::Base
 
   get '/students/:id/petitions' do
     @student = Student.find_by_id(params[:id])
-    @advisor = Helpers.current_user(session)
     erb :'/petitions/student_petitions'
   end
 

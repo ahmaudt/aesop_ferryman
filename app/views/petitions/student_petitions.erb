@@ -13,8 +13,8 @@
       </thead>
       <tbody>
         <tr>
-          <% @advisor.petitions.each.with_index(1) do |petition, index| %>
-              <td><%= index %></td>
+          <% @student.petitions.collect do |petition| %>
+              <td><%=  %></td>
           <td><%= petition.petition_type %></td>
             <td><a class="btn btn-success" href="/petitions/<%= petition.id %>" role="button">view or edit</a></td>
             <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePetition<%= petition.id %>">delete</button></td>
