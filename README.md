@@ -37,7 +37,7 @@ You will see some output in the terminal, with the URL. Navigate to the followin
 
 Once you have created an account, you may login to the application using the credentials you set when creating your account.
 The software routes you to the `/dashboard`, which lists several recent petitions--if they exist. You will need to create a list of students or create a seed file. If you wish to add students to your db, be sure their `advisor_id` is set to the proper advisor, and tha advisor account has been created.
-After creating the seed file, `seeds.rb`, execute the followig command:
+After creating the seed file, `seeds.rb`, execute the following command:
 
 `rake db:seed`
 
