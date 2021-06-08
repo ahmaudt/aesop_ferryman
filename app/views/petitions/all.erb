@@ -59,12 +59,8 @@
       </thead>
       <tbody>
         <tr>
-          <% @current_user.petitions.collect do |p| %>
-            <% i = 0 %>
-            <% if i < @current_user.petitions.count %>
-            <% i += 1 %>
-              <td><%= i %></td>
-              <% end %>
+          <% @current_user.petitions.each_with_index do |p, idx| %>
+              <td><%= idx+1 %></td>
           <td><%= p.student.first_name %></td>
           <td><%=  p.student.last_name %></td>
           <td><%=  p.student.uga_myid %></td>
@@ -91,7 +87,7 @@
           </td>
         </tr>
       <% end %>
-      </tbody>
+          </tbody>
     </table>
   </div>
 </div>
