@@ -53,3 +53,7 @@ To create petitions, navigate to `http://localhost:9393/petitions`. There are fo
 2. Exceptions
 3. Substitutions
 4. Waivers
+
+## License
+
+This sofware is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
