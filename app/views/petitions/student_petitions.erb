@@ -13,12 +13,12 @@
       </thead>
       <tbody>
         <tr>
-          <% @student.petitions.collect do |petition| %>
-              <td><%=  %></td>
-          <td><%= petition.petition_type %></td>
-            <td><a class="btn btn-success" href="/petitions/<%= petition.id %>" role="button">view or edit</a></td>
-            <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePetition<%= petition.id %>">delete</button></td>
-            <div class="modal fade" id="deletePetition<%= petition.id %>" tabindex="-1" aria-labelledby="deletePetition<%= petition.id %>" aria-hidden="true">
+          <% @student.petitions.each_with_index do |p, idx| %>
+            <td><%= idx+1 %></td>
+          <td><%= p.petition_type %></td>
+            <td><a class="btn btn-success" href="/petitions/<%= p.id %>" role="button">view or edit</a></td>
+            <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePetition<%= p.id %>">delete</button></td>
+            <div class="modal fade" id="deletePetition<%= p.id %>" tabindex="-1" aria-labelledby="deletePetition<%= p.id %>" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -30,7 +30,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <form action="/petitions/<%= petition.id %>" method="post"><input id="hidden" type="hidden" name="_method" value="delete"><input type="submit" class="btn btn-danger" value="delete"></form>
+                    <form action="/petitions/<%= p.id %>" method="post"><input id="hidden" type="hidden" name="_method" value="delete"><input type="submit" class="btn btn-danger" value="delete"></form>
                   </div>
                 </div>
               </div>
